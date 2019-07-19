@@ -30,6 +30,31 @@ env.Replace(
 if env.get("PROGNAME", "program") == "program":
     env.Replace(PROGNAME="firmware")
 
+env.Append(
+    BUILDERS=dict(
+        ElfToBin=Builder(
+            action=env.VerboseAction(" ".join([
+                "$OBJCOPY",
+                "-O",
+                "binary",
+                "$SOURCES",
+                "$TARGET"
+            ]), "Building $TARGET"),
+            suffix=".bin"
+        ),
+        ElfToHex=Builder(
+            action=env.VerboseAction(" ".join([
+                "$OBJCOPY",
+                "-O",
+                "ihex",
+                "$SOURCES",
+                "$TARGET"
+            ]), "Building $TARGET"),
+            suffix=".hex"
+        )
+    )
+)
+
 if not env.get("PIOFRAMEWORK"):
     env.SConscript("frameworks/_bare.py", exports="env")
 
@@ -40,11 +65,16 @@ if not env.get("PIOFRAMEWORK"):
 target_elf = None
 if "nobuild" in COMMAND_LINE_TARGETS:
     target_elf = join("$BUILD_DIR", "${PROGNAME}.elf")
+    target_firm = join("$BUILD_DIR", "${PROGNAME}.bin")
+    target_hex = join("$BUILD_DIR", "${PROGNAME}.hex")
 else:
     target_elf = env.BuildProgram()
+    target_firm = env.ElfToBin(join("$BUILD_DIR", "${PROGNAME}"), target_elf)
+    target_hex = env.ElfToHex(join("$BUILD_DIR", "${PROGNAME}"), target_elf)
 
-AlwaysBuild(env.Alias("nobuild", target_elf))
-target_buildprog = env.Alias("buildprog", target_elf, target_elf)
+AlwaysBuild(env.Alias("nobuild", target_hex))
+target_buildprog = env.Alias("buildprog", target_hex, target_hex)
+#target_buildhex = env.Alias("buildhex", target_hex, target_hex)
 
 #
 # Target: Print binary size
@@ -72,6 +102,26 @@ if upload_protocol == "gd-link" :
     openocd_args.extend([ 
         "-f",
         "scripts/temp/openocd_gdlink.cfg"
+    ])
+    openocd_args.extend([
+        "-c", "flash protect 0 0 last off; program {$SOURCE} %s verify; resume 0x20000000; exit;" %
+        board_config.get("upload").get("flash_start", "")
+    ])
+    env.Replace(
+        UPLOADER="openocd",
+        UPLOADERFLAGS=openocd_args,
+        UPLOADCMD="$UPLOADER $UPLOADERFLAGS")
+    upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
+
+if upload_protocol == "jlink" :
+    openocd_args = [
+        "-c",
+        "debug_level %d" % (2 if int(ARGUMENTS.get("PIOVERBOSE", 0)) else 1),
+        "-s", platform.get_package_dir("tool-openocd-gd32v") or ""
+    ]
+    openocd_args.extend([ 
+        "-f",
+        "scripts/temp/openocd_jlink.cfg"
     ])
     openocd_args.extend([
         "-c", "flash protect 0 0 last off; program {$SOURCE} %s verify; resume 0x20000000; exit;" %
