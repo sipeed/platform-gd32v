@@ -1,0 +1,1 @@
+# platform-gd32v
