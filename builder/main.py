@@ -7,7 +7,7 @@ from SCons.Script import (ARGUMENTS, COMMAND_LINE_TARGETS, AlwaysBuild,
 
 env = DefaultEnvironment()
 platform = env.PioPlatform()
-board_config = env.BoardConfig()
+board = env.BoardConfig()
 
 env.Replace(
     AR="riscv64-unknown-elf-gcc-ar",
@@ -72,8 +72,8 @@ else:
     target_firm = env.ElfToBin(join("$BUILD_DIR", "${PROGNAME}"), target_elf)
     target_hex = env.ElfToHex(join("$BUILD_DIR", "${PROGNAME}"), target_elf)
 
-AlwaysBuild(env.Alias("nobuild", target_hex))
-target_buildprog = env.Alias("buildprog", target_hex, target_hex)
+AlwaysBuild(env.Alias("nobuild", target_firm))
+target_buildprog = env.Alias("buildprog", target_firm, target_firm)
 #target_buildhex = env.Alias("buildhex", target_hex, target_hex)
 
 #
@@ -90,30 +90,31 @@ AlwaysBuild(target_size)
 # Target: Upload by default .elf file
 #
 upload_protocol = env.subst("$UPLOAD_PROTOCOL")
-
+debug_tools = board.get("debug.tools", {})
+upload_source = target_firm
 upload_actions = []
 
-if upload_protocol == "gd-link" :
-    openocd_args = [
-        "-c",
-        "debug_level %d" % (2 if int(ARGUMENTS.get("PIOVERBOSE", 0)) else 1),
-        "-s", platform.get_package_dir("tool-openocd-gd32v") or ""
-    ]
-    openocd_args.extend([ 
-        "-f",
-        "scripts/temp/openocd_gdlink.cfg"
-    ])
-    openocd_args.extend([
-        "-c", "flash protect 0 0 last off; program {$SOURCE} %s verify; resume 0x20000000; exit;" %
-        board_config.get("upload").get("flash_start", "")
-    ])
-    env.Replace(
-        UPLOADER="openocd",
-        UPLOADERFLAGS=openocd_args,
-        UPLOADCMD="$UPLOADER $UPLOADERFLAGS")
-    upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
+if upload_protocol == "serial":
+    _upload_tool = "serial_upload"
+    _upload_flags = ["{upload.altID}", "{upload.usbID}"]
 
-if upload_protocol == "jlink" :
+    def __configure_upload_port(env):
+        return basename(env.subst("$UPLOAD_PORT"))
+
+    env.Replace(
+        __configure_upload_port=__configure_upload_port,
+        UPLOADER=_upload_tool,
+        UPLOADERFLAGS=["${__configure_upload_port(__env__)}"] + _upload_flags,
+        UPLOADCMD='$UPLOADER $UPLOADERFLAGS "$PROJECT_DIR/$SOURCES"'
+    )
+
+    upload_actions = [
+        env.VerboseAction(env.AutodetectUploadPort, "Looking for upload port..."),
+        env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")
+    ]
+
+
+elif upload_protocol in debug_tools:
     openocd_args = [
         "-c",
         "debug_level %d" % (2 if int(ARGUMENTS.get("PIOVERBOSE", 0)) else 1),
@@ -121,16 +122,17 @@ if upload_protocol == "jlink" :
     ]
     openocd_args.extend([ 
         "-f",
-        "scripts/temp/openocd_jlink.cfg"
+        "scripts/temp/openocd_%s.cfg" %("gdlink" if upload_protocol == "gd-link" else "jlink")
     ])
     openocd_args.extend([
         "-c", "flash protect 0 0 last off; program {$SOURCE} %s verify; resume 0x20000000; exit;" %
-        board_config.get("upload").get("flash_start", "")
+        board.get("upload").get("flash_start", "")
     ])
     env.Replace(
         UPLOADER="openocd",
         UPLOADERFLAGS=openocd_args,
         UPLOADCMD="$UPLOADER $UPLOADERFLAGS")
+    upload_source = target_elf
     upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
 
 # custom upload tool
@@ -140,7 +142,7 @@ elif upload_protocol == "custom":
 else:
     sys.stderr.write("Warning! Unknown upload protocol %s\n" % upload_protocol)
 
-AlwaysBuild(env.Alias("upload", target_elf, upload_actions))
+AlwaysBuild(env.Alias("upload", upload_source, upload_actions))
 
 
 #

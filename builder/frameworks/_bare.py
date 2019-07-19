@@ -2,7 +2,7 @@ from SCons.Script import Import
 
 Import("env")
 
-board_config = env.BoardConfig()
+board = env.BoardConfig()
 
 env.Append(
 
@@ -11,9 +11,9 @@ env.Append(
     CCFLAGS=[
         "-Os",
         "-Wall", 
-        "-march=%s" % board_config.get("build.march"),
-        "-mabi=%s" % board_config.get("build.mabi"),
-        "-mcmodel=%s" % board_config.get("build.mcmodel"),
+        "-march=%s" % board.get("build.march"),
+        "-mabi=%s" % board.get("build.mabi"),
+        "-mcmodel=%s" % board.get("build.mcmodel"),
         "-fmessage-length=0",
         "-fsigned-char",
         "-ffunction-sections",
@@ -34,9 +34,9 @@ env.Append(
     ],
 
     LINKFLAGS=[
-        "-march=%s" % board_config.get("build.march"),
-        "-mabi=%s" % board_config.get("build.mabi"),
-        "-mcmodel=%s" % board_config.get("build.mcmodel"),
+        "-march=%s" % board.get("build.march"),
+        "-mabi=%s" % board.get("build.mabi"),
+        "-mcmodel=%s" % board.get("build.mcmodel"),
         "-nostartfiles",
         "-Xlinker",
         "--gc-sections",

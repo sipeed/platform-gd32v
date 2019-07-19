@@ -4,7 +4,7 @@ from SCons.Script import DefaultEnvironment
 
 env = DefaultEnvironment()
 
-board_config = env.BoardConfig()
+board = env.BoardConfig()
 
 FRAMEWORK_DIR = env.PioPlatform().get_package_dir("framework-gd32vf103_firmware_library")
 assert FRAMEWORK_DIR and isdir(FRAMEWORK_DIR)
@@ -34,7 +34,7 @@ env.Append(
 
 
 env.Replace(
-    LDSCRIPT_PATH = join(FRAMEWORK_DIR, "n22", "env_Eclipse", board_config.get("build.ldscript")) 
+    LDSCRIPT_PATH = join(FRAMEWORK_DIR, "n22", "env_Eclipse", board.get("build.ldscript")) 
 )
 
 #
@@ -58,7 +58,7 @@ libs = [
 
 env.Prepend(LIBS=libs)
 
-if board_config.get("name") == "GD32VF103V-EVAL":
+if board.get("name") == "GD32VF103V-EVAL":
     
     env.Prepend(
         CPPPATH = [

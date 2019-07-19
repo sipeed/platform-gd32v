@@ -35,6 +35,11 @@
             "type": "uploader",
             "version": "0.1.0"
         },
+        "tool-stm32duino": {
+            "type": "uploader",
+            "optional": true,
+            "version": "~1.0.1"
+        },
         "toolchain-gd32v": {
             "type": "toolchain",
             "version": "0.1.0"
