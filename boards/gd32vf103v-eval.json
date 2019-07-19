@@ -1,0 +1,27 @@
+{
+    "build": {
+        "f_cpu": "108000000L",
+        "hwids": [
+            [
+                "0x28e9",
+                "0x058f"
+            ]
+        ],
+        "ldscript": "GD32VF103xB.lds",
+        "mabi": "ilp32",
+        "march": "rv32imac",
+        "mcmodel": "medlow",
+        "mcu": "GD32VF103VBT6"
+    },
+    "frameworks": [
+        "gd32vf103_firmware_library"
+    ],
+    "name": "GD32VF103V-EVAL",
+    "upload": {
+        "maximum_ram_size": 32768,
+        "maximum_size": 131072,
+        "protocol": "gd-link"
+    },
+    "url": "https://www.sipeed.com/",
+    "vendor": "Sipeed"
+}

@@ -1,0 +1,44 @@
+{
+    "name": "gd32v",
+    "title": "GD32V",
+    "description": "GD32V is a risc-v 32 bit mcu.",
+    "url": "https://",
+    "homepage": "http://",
+    "license": "",
+    "engines": {
+        "platformio": "<5"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/btx000/platform-gd32v.git"
+    },
+    "version": "0.0.1",
+    "packageRepositories": [
+        "http://dl.sipeed.com/MAIX/platformio/dl-packages/manifest.json",
+        "https://dl.bintray.com/platformio/dl-packages/manifest.json",
+        "http://dl.platformio.org/packages/manifest.json"
+    ],
+    "frameworks": {
+        "gd32vf103_firmware_library": {
+            "package": "framework-gd32vf103_firmware_library",
+            "script": "builder/frameworks/firmware_library.py"
+        }
+    },
+    "packages": {
+        "framework-gd32vf103_firmware_library": {
+            "optional": true,
+            "type": "framework",
+            "version": "0.1.0"
+        },
+        "tool-openocd-gd32v": {
+            "optional": true,
+            "type": "uploader",
+            "version": "0.1.0"
+        },
+        "toolchain-gd32v": {
+            "type": "toolchain",
+            "version": "0.1.0"
+        }
+    }
+
+}
