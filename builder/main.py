@@ -95,17 +95,18 @@ upload_source = target_firm
 upload_actions = []
 
 if upload_protocol == "serial":
-    _upload_tool = "serial_upload"
-    _upload_flags = ["{upload.altID}", "{upload.usbID}"]
-
-    def __configure_upload_port(env):
-        return basename(env.subst("$UPLOAD_PORT"))
+    # def __configure_upload_port(env):
+    #     return basename(env.subst("$UPLOAD_PORT"))
 
     env.Replace(
-        __configure_upload_port=__configure_upload_port,
-        UPLOADER=_upload_tool,
-        UPLOADERFLAGS=["${__configure_upload_port(__env__)}"] + _upload_flags,
-        UPLOADCMD='$UPLOADER $UPLOADERFLAGS "$PROJECT_DIR/$SOURCES"'
+        # __configure_upload_port=__configure_upload_port,
+        UPLOADER="stm32flash",
+        UPLOADERFLAGS=[
+            "-g", board.get("upload.offset_address", "0x08000000"),
+            "-b", "115200", "-w"
+        ],
+        #UPLOADCMD='$UPLOADER $UPLOADERFLAGS "$SOURCE" "${__configure_upload_port(__env__)}"'
+        UPLOADCMD='$UPLOADER $UPLOADERFLAGS "$SOURCE" "$UPLOAD_PORT"'
     )
 
     upload_actions = [
@@ -122,7 +123,7 @@ elif upload_protocol in debug_tools:
     ]
     openocd_args.extend([ 
         "-f",
-        "scripts/temp/openocd_%s.cfg" %("gdlink" if upload_protocol == "gd-link" else "jlink")
+        "scripts/temp/openocd_%s.cfg" %("gdlink" if upload_protocol == "gd-link" else "jlink")  # .cfg in a temp path
     ])
     openocd_args.extend([
         "-c", "flash protect 0 0 last off; program {$SOURCE} %s verify; resume 0x20000000; exit;" %

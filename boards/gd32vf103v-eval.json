@@ -59,7 +59,7 @@
                     "$LOAD_CMD",
                     "pio_reset_halt_target"
                 ],
-                "onboard": true,
+                "onboard": false,
                 "server": {
                     "arguments": [
                         "-f",
