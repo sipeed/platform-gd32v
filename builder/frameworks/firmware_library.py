@@ -21,8 +21,6 @@ env.Append(
         join(FRAMEWORK_DIR, "n22", "drivers"),
         join(FRAMEWORK_DIR, "n22", "env_Eclipse"),
         join(FRAMEWORK_DIR, "n22", "stubs"),
-        join(FRAMEWORK_DIR, "n22", "drivers"),
-        join(FRAMEWORK_DIR, "n22", "drivers"),
     ],
 
     LIBS = [
