@@ -22,11 +22,20 @@
         "gd32vf103_firmware_library": {
             "package": "framework-gd32vf103_firmware_library",
             "script": "builder/frameworks/firmware_library.py"
+        },
+        "arduino": {
+            "package": "framework-arduino-gd32v",
+            "script": "builder/frameworks/arduino.py"
         }
     },
     "packages": {
         "framework-gd32vf103_firmware_library": {
             "optional": true,
+            "type": "framework",
+            "version": "0.1.0"
+        },
+        "framework-arduino-gd32v": {
+            "optional":true,
             "type": "framework",
             "version": "0.1.0"
         },

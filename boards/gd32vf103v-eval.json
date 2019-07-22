@@ -11,7 +11,9 @@
         "mabi": "ilp32",
         "march": "rv32imac",
         "mcmodel": "medlow",
-        "mcu": "GD32VF103VBT6"
+        "mcu": "GD32VF103VBT6",
+        "variant": "gd32vf103_eval",
+        "board_def": "BOARD_GD32VF103V_EVAL"
     },
     "debug": {
         "tools": {
@@ -72,7 +74,8 @@
         }
     },
     "frameworks": [
-        "gd32vf103_firmware_library"
+        "gd32vf103_firmware_library",
+        "arduino"
     ],
     "name": "GD32VF103V-EVAL",
     "upload": {
