@@ -13,7 +13,7 @@
         "mcmodel": "medlow",
         "mcu": "GD32VF103VBT6",
         "variant": "gd32vf103_eval",
-        "board_def": "BOARD_GD32VF103V_EVAL"
+        "board_def": "BOARD_GD32VF103_EVAL"
     },
     "debug": {
         "tools": {
