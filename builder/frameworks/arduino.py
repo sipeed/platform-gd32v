@@ -14,6 +14,12 @@ env.SConscript("_bare.py", exports="env")
 
 env.Append(
 
+    CPPDEFINES = [
+        ("ARDUINO", 10805),
+        ("ARDUINO_VARIANT", '\\"%s\\"' % env.BoardConfig().get("build.variant").replace('"', "")),
+        ("ARDUINO_BOARD", '\\"%s\\"' % env.BoardConfig().get("build.board_def").replace('"', ""))
+    ],
+    
     CPPPATH = [
         join(FRAMEWORK_DIR, "cores", "arduino"),
         join(FRAMEWORK_DIR, "cores", "arduino", "deprecated-avr-comp"),
