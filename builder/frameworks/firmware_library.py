@@ -18,9 +18,9 @@ env.Append(
         join(FRAMEWORK_DIR, "GD32VF103_standard_peripheral", "Include"),
         join(FRAMEWORK_DIR, "GD32VF103_usbfs_driver"),
         join(FRAMEWORK_DIR, "GD32VF103_usbfs_driver", "Include"),
-        join(FRAMEWORK_DIR, "n22", "drivers"),
-        join(FRAMEWORK_DIR, "n22", "env_Eclipse"),
-        join(FRAMEWORK_DIR, "n22", "stubs"),
+        join(FRAMEWORK_DIR, "RISCV", "drivers"),
+        join(FRAMEWORK_DIR, "RISCV", "env_Eclipse"),
+        join(FRAMEWORK_DIR, "RISCV", "stubs"),
     ],
 
     LIBS = [
@@ -32,7 +32,7 @@ env.Append(
 
 
 env.Replace(
-    LDSCRIPT_PATH = join(FRAMEWORK_DIR, "n22", "env_Eclipse", board.get("build.ldscript")) 
+    LDSCRIPT_PATH = join(FRAMEWORK_DIR, "RISCV", "env_Eclipse", board.get("build.ldscript")) 
 )
 
 #
@@ -49,27 +49,27 @@ libs = [
 #        join(FRAMEWORK_DIR, "GD32VF103_usbfs_driver")),
     
     env.BuildLibrary(
-        join("$BUILD_DIR", "n22"),
-        join(FRAMEWORK_DIR, "n22")),
+        join("$BUILD_DIR", "RISCV"),
+        join(FRAMEWORK_DIR, "RISCV")),
 
 ]
 
 env.Prepend(LIBS=libs)
 
-if board.get("name") == "GD32VF103V-EVAL":
+# if board.get("name") == "GD32VF103V-EVAL":
     
-    env.Prepend(
-        CPPPATH = [
-            join(FRAMEWORK_DIR, "Utilities"),
-            join(FRAMEWORK_DIR, "Utilities", "LCD_common"),
-        ]
-    )
+#     env.Prepend(
+#         CPPPATH = [
+#             join(FRAMEWORK_DIR, "Utilities"),
+#             join(FRAMEWORK_DIR, "Utilities", "LCD_common"),
+#         ]
+#     )
 
-    libs = [
-        env.BuildLibrary(
-            join("$BUILD_DIR", "eval_board_lib"),
-            join(FRAMEWORK_DIR, "Utilities")),
-    ]
+#     libs = [
+#         env.BuildLibrary(
+#             join("$BUILD_DIR", "eval_board_lib"),
+#             join(FRAMEWORK_DIR, "Utilities")),
+#     ]
 
-    env.Prepend(LIBS=libs)
+#     env.Prepend(LIBS=libs)
 

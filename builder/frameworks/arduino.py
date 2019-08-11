@@ -27,11 +27,9 @@ env.Append(
         join(SDK_DIR, "GD32VF103_standard_peripheral", "Include"),
         join(SDK_DIR, "GD32VF103_usbfs_driver"),
         join(SDK_DIR, "GD32VF103_usbfs_driver", "Include"),
-        join(SDK_DIR, "n22", "drivers"),
-        join(SDK_DIR, "n22", "env_Eclipse"),
-        join(SDK_DIR, "n22", "stubs"),
-        join(SDK_DIR, "Utilities"),
-        join(SDK_DIR, "Utilities", "LCD_common"),
+        join(SDK_DIR, "RISCV", "drivers"),
+        join(SDK_DIR, "RISCV", "env_Eclipse"),
+        join(SDK_DIR, "RISCV", "stubs"),
     ],
 
     LIBS = [
@@ -45,7 +43,7 @@ env.Append(
 )
 
 env.Replace(
-    LDSCRIPT_PATH = join(SDK_DIR, "n22", "env_Eclipse", board.get("build.ldscript")) 
+    LDSCRIPT_PATH = join(SDK_DIR, "RISCV", "env_Eclipse", board.get("build.ldscript")) 
 )
 
 #

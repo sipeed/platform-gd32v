@@ -1,6 +1,6 @@
 /*!
-    \file  gd32vf103_libopt.h
-    \brief library optional for gd32vf103
+    \file  systick.c
+    \brief the systick configuration file
 
     \version 2019-6-5, V1.0.0, firmware for GD32VF103
 */
@@ -32,30 +32,26 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 OF SUCH DAMAGE.
 */
 
-#ifndef GD32VF103_LIBOPT_H
-#define GD32VF103_LIBOPT_H
+#include "gd32vf103.h"
+#include "systick.h"
 
-#include "gd32vf103_adc.h"
-#include "gd32vf103_bkp.h"
-#include "gd32vf103_can.h"
-#include "gd32vf103_crc.h"
-#include "gd32vf103_dac.h"
-#include "gd32vf103_dma.h"
-#include "gd32vf103_eclic.h"
-#include "gd32vf103_exmc.h"
-#include "gd32vf103_exti.h"
-#include "gd32vf103_fmc.h"
-#include "gd32vf103_gpio.h"
-#include "gd32vf103_i2c.h"
-#include "gd32vf103_fwdgt.h"
-#include "gd32vf103_dbg.h"
-#include "gd32vf103_pmu.h"
-#include "gd32vf103_rcu.h"
-#include "gd32vf103_rtc.h"
-#include "gd32vf103_spi.h"
-#include "gd32vf103_timer.h"
-#include "gd32vf103_usart.h"
-#include "gd32vf103_wwdgt.h"
-#include "n22_func.h"
+/*!
+    \brief      delay a time in milliseconds
+    \param[in]  count: count in milliseconds
+    \param[out] none
+    \retval     none
+*/
+void delay_1ms(uint32_t count)
+{
+    uint64_t start_mtime, delta_mtime;
 
-#endif /* GD32VF103_LIBOPT_H */
+    // Don't start measuruing until we see an mtime tick
+    uint64_t tmp = get_timer_value();
+    do {
+    start_mtime = get_timer_value();
+    } while (start_mtime == tmp);
+
+    do {
+    delta_mtime = get_timer_value() - start_mtime;
+    }while(delta_mtime <(SystemCoreClock/4000.0 *count ));
+}

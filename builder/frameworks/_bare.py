@@ -31,7 +31,7 @@ env.Append(
 
     CPPDEFINES = [
         "USE_STDPERIPH_DRIVER",
-        ("HXTAL_VALUE", "((uint32_t)25000000)") # TODO: add into board json
+        ("HXTAL_VALUE", "((uint32_t)%s)" % board.get("build.hxtal_value"))
     ],
 
     LINKFLAGS=[

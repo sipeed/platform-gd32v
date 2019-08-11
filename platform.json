@@ -32,12 +32,12 @@
         "framework-gd32vf103_firmware_library": {
             "optional": true,
             "type": "framework",
-            "version": "0.1.0"
+            "version": "0.1.1"
         },
         "framework-arduino-gd32v": {
             "optional":true,
             "type": "framework",
-            "version": "0.1.0"
+            "version": "0.1.1"
         },
         "tool-openocd-gd32v": {
             "optional": true,
