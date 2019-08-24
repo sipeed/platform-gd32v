@@ -1,20 +1,20 @@
 {
     "name": "gd32v",
-    "title": "GD32V",
-    "description": "GD32V is a risc-v 32 bit mcu.",
-    "url": "https://",
+    "title": "Platform for GD32V Series MCU",
+    "description": "GD32V is a Risc-V 32-bit MCU. This platform is ported by Sipeed.",
+    "url": "https://www.sipeed.com",
     "homepage": "http://",
-    "license": "",
+    "license": "Apache-2.0",
     "engines": {
         "platformio": "<5"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/btx000/platform-gd32v.git"
+        "url": "https://github.com/sipeed/platform-gd32v.git"
     },
     "version": "0.0.1",
     "packageRepositories": [
-        "http://dl.sipeed.com/MAIX/platformio/dl-packages/manifest.json",
+        "http://dl.sipeed.com/LONGAN/platformio/dl-packages/manifest.json",
         "https://dl.bintray.com/platformio/dl-packages/manifest.json",
         "http://dl.platformio.org/packages/manifest.json"
     ],
@@ -32,26 +32,26 @@
         "framework-gd32vf103_firmware_library": {
             "optional": true,
             "type": "framework",
-            "version": "0.1.1"
+            "version": "~0.1.1"
         },
         "framework-arduino-gd32v": {
             "optional":true,
             "type": "framework",
-            "version": "0.1.1"
+            "version": "~0.1.1"
         },
         "tool-openocd-gd32v": {
             "optional": true,
             "type": "uploader",
-            "version": "0.1.0"
+            "version": "~0.1.0"
         },
         "tool-stm32duino": {
             "type": "uploader",
             "optional": true,
             "version": "~1.0.1"
         },
-        "toolchain-gd32v": {
+        "toolchain-riscv": {
             "type": "toolchain",
-            "version": "0.1.1"
+            "version": "~1.70200.0"
         }
     }
 
