@@ -7,14 +7,14 @@
                 "0x058f"
             ]
         ],
-        "ldscript": "GD32VF103x8.lds",
+        "ldscript": "GD32VF103xB.lds",
         "mabi": "ilp32",
         "march": "rv32imac",
         "mcmodel": "medlow",
-        "mcu": "GD32VF103C8T6",
+        "mcu": "GD32VF103CBT6",
         "variant": "sipeed-longan-nano",
         "board_def": "BOARD_SIPEED_LONGAN_NANO",
-        "hxtal_value": "25000000"
+        "hxtal_value": "8000000"
     },
     "debug": {
         "tools": {
