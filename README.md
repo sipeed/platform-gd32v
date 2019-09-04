@@ -1,5 +1,4 @@
 # platform-gd32v
-# platform-kendryte210
 
 # Usage
 
