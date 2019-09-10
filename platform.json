@@ -14,6 +14,7 @@
     },
     "version": "0.0.1",
     "packageRepositories": [
+        "https://raw.githubusercontent.com/MindShow/platform_gd32vf_packages/master/manifest.json",
         "http://dl.sipeed.com/LONGAN/platformio/dl-packages/manifest.json",
         "https://dl.bintray.com/platformio/dl-packages/manifest.json",
         "http://dl.platformio.org/packages/manifest.json"
