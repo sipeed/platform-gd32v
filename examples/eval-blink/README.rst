@@ -20,7 +20,7 @@ How to build PlatformIO based project
 .. code-block:: bash
 
     # Change directory to example
-    > cd platform-kendryte210/examples/arduino-blink
+    > cd platform-gd32v/examples/arduino-blink
 
     # Build project
     > platformio run

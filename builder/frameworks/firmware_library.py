@@ -6,7 +6,7 @@ env = DefaultEnvironment()
 
 board = env.BoardConfig()
 
-FRAMEWORK_DIR = env.PioPlatform().get_package_dir("framework-gd32vf103_firmware_library")
+FRAMEWORK_DIR = env.PioPlatform().get_package_dir("framework-gd32vf103-sdk")
 assert FRAMEWORK_DIR and isdir(FRAMEWORK_DIR)
 
 env.SConscript("_bare.py", exports="env")

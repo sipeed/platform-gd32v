@@ -4,7 +4,7 @@
         "hwids": [
             [
                 "0x28e9",
-                "0x058f"
+                "0x0189"
             ]
         ],
         "ldscript": "GD32VF103xB.lds",
@@ -16,66 +16,8 @@
         "board_def": "BOARD_SIPEED_LONGAN_NANO",
         "hxtal_value": "8000000"
     },
-    "debug": {
-        "tools": {
-            "gd-link": {
-                "init_cmds": [
-                    "define pio_reset_halt_target",
-                    "   monitor init",
-                    "   monitor halt",
-                    "end",
-                    "define pio_reset_target",
-                    "   pio_reset_halt_target",
-                    "end",
-                    "target remote $DEBUG_PORT",
-                    "set arch riscv:rv32",
-                    "set mem inaccessible-by-default off",
-                    "set remotetimeout 250",
-                    "$INIT_BREAK",
-                    "$LOAD_CMD",
-                    "pio_reset_halt_target"
-                ],
-                "onboard": false,
-                "server": {
-                    "arguments": [
-                        "-f",
-                        "scripts/temp/openocd_gdlink.cfg"
-                    ],
-                    "executable": "bin/openocd",
-                    "package": "tool-openocd-gd32v"
-                }
-            },
-            "jlink": {
-                "init_cmds": [
-                    "define pio_reset_halt_target",
-                    "   monitor init",
-                    "   monitor halt",
-                    "end",
-                    "define pio_reset_target",
-                    "   pio_reset_halt_target",
-                    "end",
-                    "target remote $DEBUG_PORT",
-                    "set arch riscv:rv32",
-                    "set mem inaccessible-by-default off",
-                    "set remotetimeout 250",
-                    "$INIT_BREAK",
-                    "$LOAD_CMD",
-                    "pio_reset_halt_target"
-                ],
-                "onboard": false,
-                "server": {
-                    "arguments": [
-                        "-f",
-                        "scripts/temp/openocd_jlink.cfg"
-                    ],
-                    "executable": "bin/openocd",
-                    "package": "tool-openocd-gd32v"
-                }
-            }
-        }
-    },
     "frameworks": [
-        "gd32vf103_firmware_library",
+        "gd32vf103-sdk",
         "arduino"
     ],
     "name": "Sipeed Longan Nano",

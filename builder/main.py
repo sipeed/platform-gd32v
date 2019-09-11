@@ -10,14 +10,14 @@ platform = env.PioPlatform()
 board = env.BoardConfig()
 
 env.Replace(
-    AR="riscv64-unknown-elf-gcc-ar",
-    AS="riscv64-unknown-elf-as",
-    CC="riscv64-unknown-elf-gcc",
-    GDB="riscv64-unknown-elf-gdb",
-    CXX="riscv64-unknown-elf-g++",
-    OBJCOPY="riscv64-unknown-elf-objcopy",
-    RANLIB="riscv64-unknown-elf-gcc-ranlib",
-    SIZETOOL="riscv64-unknown-elf-size",
+    AR="riscv-nuclei-elf-gcc-ar",
+    AS="riscv-nuclei-elf-as",
+    CC="riscv-nuclei-elf-gcc",
+    GDB="riscv-nuclei-elf-gdb",
+    CXX="riscv-nuclei-elf-g++",
+    OBJCOPY="riscv-nuclei-elf-objcopy",
+    RANLIB="riscv-nuclei-elf-gcc-ranlib",
+    SIZETOOL="riscv-nuclei-elf-size",
 
     ARFLAGS=["rc"],
 
@@ -114,6 +114,26 @@ if upload_protocol == "serial":
         env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")
     ]
 
+elif upload_protocol == "dfu":
+    hwids = board.get("build.hwids", [["0x0483", "0xDF11"]])
+    vid = hwids[0][0]
+    pid = hwids[0][1]
+    _upload_tool = "dfu-util"
+    _upload_flags = [
+        "-d", "%s:%s" % (vid.split('x')[1], pid.split('x')[1]),
+        "-a", "0", "--dfuse-address",
+        "%s:leave" % board.get("upload.offset_address", "0x08000000"), "-D"
+    ]
+    
+    upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
+
+    env.Replace(
+        UPLOADER = _upload_tool,
+        UPLOADERFLAGS = _upload_flags,
+        UPLOADCMD = '$UPLOADER $UPLOADERFLAGS "${SOURCE.get_abspath()}"'
+    )
+
+    upload_source = target_firm
 
 elif upload_protocol in debug_tools:
     openocd_args = [

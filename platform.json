@@ -19,8 +19,8 @@
         "http://dl.platformio.org/packages/manifest.json"
     ],
     "frameworks": {
-        "gd32vf103_firmware_library": {
-            "package": "framework-gd32vf103_firmware_library",
+        "gd32vf103-sdk": {
+            "package": "framework-gd32vf103-sdk",
             "script": "builder/frameworks/firmware_library.py"
         },
         "arduino": {
@@ -29,10 +29,10 @@
         }
     },
     "packages": {
-        "framework-gd32vf103_firmware_library": {
+        "framework-gd32vf103-sdk": {
             "optional": true,
             "type": "framework",
-            "version": "~0.1.1"
+            "version": "~1.0.0"
         },
         "framework-arduino-gd32v": {
             "optional":true,
@@ -44,14 +44,14 @@
             "type": "uploader",
             "version": "~0.1.0"
         },
-        "tool-stm32duino": {
+        "tool-gd32vflash": {
             "type": "uploader",
             "optional": true,
-            "version": "~1.0.1"
+            "version": "~0.1.0"
         },
-        "toolchain-riscv": {
+        "toolchain-gd32v": {
             "type": "toolchain",
-            "version": "~1.70200.0"
+            "version": "~9.2.0"
         }
     }
 
