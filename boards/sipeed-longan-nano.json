@@ -16,6 +16,9 @@
         "board_def": "BOARD_SIPEED_LONGAN_NANO",
         "hxtal_value": "8000000"
     },
+    "debug":{
+        "svd_path": "GD32VF103.svd"
+    },
     "frameworks": [
         "gd32vf103-sdk",
         "arduino"
