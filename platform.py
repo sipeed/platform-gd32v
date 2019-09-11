@@ -27,7 +27,9 @@ class Gd32vPlatform(PlatformBase):
             "jlink",
             "gd-link",
             "ft2232",
-            "sipeed-rv-debugger"
+            "sipeed-rv-debugger",
+            "altera-usb-blaster",
+            "um232h"
         ]
 
         upload_protocol = board.manifest.get("upload", {}).get("protocol")
@@ -46,7 +48,7 @@ class Gd32vPlatform(PlatformBase):
             if link in non_debug_protocols or link in debug['tools']:
                 continue
 
-            if link in ["jlink", "gd-link"]:
+            if link in ["jlink", "gd-link", "altera-usb-blaster"]:
                 openocd_interface = link
             else:
                 openocd_interface = "ftdi/" + link
@@ -54,9 +56,14 @@ class Gd32vPlatform(PlatformBase):
             server_args = [
                 "-s", "$PACKAGE_DIR/share/openocd/scripts",
                 "-f", "interface/%s.cfg" % openocd_interface,
-                "-c", "adapter_khz 1000",
+                "-c", "transport select jtag",
                 "-f", "target/gd32vf103.cfg"
             ]
+            server_args.append("-c")
+            if link in ["um232h"]:
+                server_args.append("adapter_khz 8000")
+            else:
+                server_args.append("adapter_khz 1000")
 
             debug['tools'][link] = {
                 "server": {
