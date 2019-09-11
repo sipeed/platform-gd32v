@@ -42,7 +42,7 @@
         "tool-openocd-gd32v": {
             "optional": true,
             "type": "uploader",
-            "version": "~0.1.0"
+            "version": "~0.1.1"
         },
         "tool-gd32vflash": {
             "type": "uploader",
