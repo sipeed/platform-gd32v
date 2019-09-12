@@ -13,7 +13,7 @@ How to build PlatformIO based project
 =====================================
 
 1. `Install PlatformIO Core <http://docs.platformio.org/page/core.html>`_
-2. Download `development platform with examples <https://github.com/platformio/platform-espressif32/archive/develop.zip>`_
+2. Download `development platform with examples <https://github.com/platformio/platform-gd32v/archive/develop.zip>`_
 3. Extract ZIP archive
 4. Run these commands:
 
@@ -29,10 +29,10 @@ How to build PlatformIO based project
     > platformio run --target upload
 
     # Build specific environment
-    > platformio run -e sipeed-maix-go
+    > platformio run -e sipeed-longan-nano
 
     # Upload firmware for the specific environment
-    > platformio run -e sipeed-maix-go --target upload
+    > platformio run -e sipeed-longan-nano --target upload
 
     # Clean build files
     > platformio run --target clean
