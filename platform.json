@@ -3,7 +3,7 @@
     "title": "Platform for GD32V Series MCU",
     "description": "GD32V is a Risc-V 32-bit MCU. This platform is ported by Sipeed.",
     "url": "https://www.sipeed.com",
-    "homepage": "http://",
+    "homepage": "https://github.com/sipeed/platform-gd32v",
     "license": "Apache-2.0",
     "engines": {
         "platformio": "<5"
