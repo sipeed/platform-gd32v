@@ -1,0 +1,16 @@
+language: python
+python:
+  - "2.7"
+  - "3.6"
+
+env:
+  - PLATFORMIO_PROJECT_DIR=examples/arduino-blink
+  - PLATFORMIO_PROJECT_DIR=examples/eval-bilnk
+  - PLATFORMIO_PROJECT_DIR=examples/longan-nano-blink
+
+install:
+  - pip install -U https://github.com/platformio/platformio/archive/develop.zip
+  - platformio platform install file://.
+
+script:
+  - platformio run -d $PLATFORMIO_PROJECT_DIR

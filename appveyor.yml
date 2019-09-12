@@ -1,0 +1,16 @@
+build: off
+environment:
+
+  matrix:
+    - PLATFORMIO_PROJECT_DIR: "examples/arduino-blink"
+    - PLATFORMIO_PROJECT_DIR: "examples/eval-blink"
+    - PLATFORMIO_PROJECT_DIR: "examples/longan-nano-blink"
+
+install:
+- cmd: git submodule update --init --recursive
+- cmd: SET PATH=%PATH%;C:\Python36\Scripts
+- cmd: pip3 install -U https://github.com/platformio/platformio/archive/develop.zip
+- cmd: platformio platform install file://.
+
+test_script:
+- cmd: platformio run -d %PLATFORMIO_PROJECT_DIR%
