@@ -1,6 +1,6 @@
 # platform-gd32v
 [![Build Status](https://travis-ci.org/sipeed/platform-gd32v.svg?branch=master)](https://travis-ci.org/sipeed/platform-gd32v)
-[![Build status](https://ci.appveyor.com/api/projects/status/s78chv6nek6s30nm?svg=true)](https://ci.appveyor.com/project/sipeed/platform-gd32v)
+[![Build status](https://ci.appveyor.com/api/projects/status/x71h1eyhiljmngpo?svg=true)](https://ci.appveyor.com/project/btx000/platform-gd32v)
 
 # Usage
 
