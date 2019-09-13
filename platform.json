@@ -1,9 +1,11 @@
 {
     "name": "gd32v",
-    "title": "Platform for GD32V Series MCU",
-    "description": "GD32V is a Risc-V 32-bit MCU. This platform is ported by Sipeed.",
-    "url": "https://www.sipeed.com",
-    "homepage": "http://",
+    "title": "GigaDevice GD32V",
+    "version": "1.0.0",
+    "keywords": "risc-v, gd32v, sipeed, longan, arduino",
+    "description": "The GigaDevice GD32V device is a 32-bit general-purpose microcontroller based on the RISC-V core with an impressive balance of processing power, reduced power consumption and peripheral set.",
+    "url": "https://www.gigadevice.com/products/microcontrollers/gd32/risc-v/",
+    "homepage": "http://platformio.org/platforms/gd32v",
     "license": "Apache-2.0",
     "engines": {
         "platformio": "<5"
@@ -12,9 +14,12 @@
         "type": "git",
         "url": "https://github.com/sipeed/platform-gd32v.git"
     },
-    "version": "0.0.1",
+    "authors": [{
+        "name": "Sipeed",
+        "email": "support@sipeed.com",
+        "url": "https://www.sipeed.com"
+    }],
     "packageRepositories": [
-        "http://dl.sipeed.com/LONGAN/platformio/dl-packages/manifest.json",
         "https://dl.bintray.com/platformio/dl-packages/manifest.json",
         "http://dl.platformio.org/packages/manifest.json"
     ],
