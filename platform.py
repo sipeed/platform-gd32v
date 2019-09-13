@@ -19,14 +19,14 @@ class Gd32vPlatform(PlatformBase):
             board.manifest['upload']['protocols'] = ["serial"]
         if not board.get("upload.protocol", ""):
             board.manifest['upload']['protocol'] = "serial"
-        
+
         # debug tools
         debug = board.manifest.get("debug", {})
         non_debug_protocols = ["serial"]
         supported_debug_tools = [
             "jlink",
             "gd-link",
-            "ft2232",
+            # "ft2232",  # duplicate of sipeed-rv-debugger
             "sipeed-rv-debugger",
             "altera-usb-blaster",
             "um232h"
@@ -42,7 +42,7 @@ class Gd32vPlatform(PlatformBase):
 
         if "tools" not in debug:
             debug['tools'] = {}
-        
+
         # Only FTDI based debug probes
         for link in upload_protocols:
             if link in non_debug_protocols or link in debug['tools']:
