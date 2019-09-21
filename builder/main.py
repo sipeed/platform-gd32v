@@ -137,17 +137,20 @@ elif upload_protocol == "dfu":
 
 elif upload_protocol in debug_tools:
     openocd_args = [
-        "-c",
-        "debug_level %d" % (2 if int(ARGUMENTS.get("PIOVERBOSE", 0)) else 1),
-        "-s", platform.get_package_dir("tool-openocd-gd32v") or ""
+        #"-c",
+        #"debug_level %d" % (2 if int(ARGUMENTS.get("PIOVERBOSE", 0)) else 1),
+        #"-s", platform.get_package_dir("tool-openocd-gd32v") or ""
     ]
-    openocd_args.extend([ 
-        "-f",
-        "scripts/temp/openocd_%s.cfg" %("gdlink" if upload_protocol == "gd-link" else "jlink")  # .cfg in a temp path
-    ])
+    # openocd_args.extend([ 
+    #     "-f",
+    #     "scripts/temp/openocd_%s.cfg" %("gdlink" if upload_protocol == "gd-link" else "jlink")  # .cfg in a temp path
+    # ])
+    openocd_args.extend(
+        debug_tools.get(upload_protocol).get("server").get("arguments", [])
+    )
     openocd_args.extend([
-        "-c", "flash protect 0 0 last off; program {$SOURCE} %s verify; resume 0x20000000; exit;" %
-        board.get("upload").get("flash_start", "")
+        "-c", "init; halt;",
+        "-c", "flash protect 0 0 last off; program {$SOURCE} verify; mww 0xe004200c 0x4b5a6978; mww 0xe0042008 0x01; resume; exit 0;"
     ])
     env.Replace(
         UPLOADER="openocd",
