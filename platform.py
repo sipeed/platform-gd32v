@@ -29,7 +29,8 @@ class Gd32vPlatform(PlatformBase):
             # "ft2232",  # duplicate of sipeed-rv-debugger
             "sipeed-rv-debugger",
             "altera-usb-blaster",
-            "um232h"
+            "um232h",
+            "rv-link"
         ]
 
         upload_protocol = board.manifest.get("upload", {}).get("protocol")
@@ -50,6 +51,25 @@ class Gd32vPlatform(PlatformBase):
 
             if link in ["jlink", "gd-link", "altera-usb-blaster"]:
                 openocd_interface = link
+            elif link == "rv-link":
+                debug['tools']['rv-link'] = {
+                    "hwids": [["0x28e9", "0x018a"]],
+                    "require_debug_port": True,
+                    "init_cmds": [
+                        "define pio_reset_halt_target",
+                        "    monitor reset halt",
+                        "end",
+                        "define pio_reset_target",
+                        "    monitor reset",
+                        "end",
+                        "target extended-remote $DEBUG_PORT",
+                        "$INIT_BREAK",
+                        "pio_reset_halt_target",
+                        "$LOAD_CMDS",
+                        "monitor init",
+                        "pio_reset_halt_target"
+                    ]
+                }
             else:
                 openocd_interface = "ftdi/" + link
 
@@ -65,13 +85,14 @@ class Gd32vPlatform(PlatformBase):
             else:
                 server_args.append("adapter_khz 1000")
 
-            debug['tools'][link] = {
-                "server": {
-                    "package": "tool-openocd-gd32v",
-                    "executable": "bin/openocd",
-                    "arguments": server_args
+            if link != "rv-link":
+                debug['tools'][link] = {
+                    "server": {
+                        "package": "tool-openocd-gd32v",
+                        "executable": "bin/openocd",
+                        "arguments": server_args
+                    }
                 }
-            }
 
         board.manifest['debug'] =debug
         return board
