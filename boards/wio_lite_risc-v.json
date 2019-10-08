@@ -1,0 +1,34 @@
+{
+    "build": {
+        "f_cpu": "108000000L",
+        "hwids": [
+            [
+                "0x28e9",
+                "0x0189"
+            ]
+        ],
+        "ldscript": "GD32VF103xB.lds",
+        "mabi": "ilp32",
+        "march": "rv32imac",
+        "mcmodel": "medlow",
+        "mcu": "GD32VF103CBT6",
+        "variant": "wio_lite_risc-v",
+        "board_def": "BOARD_WIO_LITE_RISC-V",
+        "hxtal_value": "8000000"
+    },
+    "debug":{
+        "svd_path": "GD32VF103.svd"
+    },
+    "frameworks": [
+        "gd32vf103-sdk",
+        "arduino"
+    ],
+    "name": "Wio Lite RISC-V",
+    "upload": {
+        "maximum_ram_size": 32768,
+        "maximum_size": 131072,
+        "protocol": "serial"
+    },
+    "url": "https://www.seeedstudio.com/Wio-Lite-RISC-V-GD32VF103-p-4293.html",
+    "vendor": "SeeedStudio"
+}
