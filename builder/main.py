@@ -74,7 +74,7 @@ else:
 
 AlwaysBuild(env.Alias("nobuild", target_firm))
 target_buildprog = env.Alias("buildprog", target_firm, target_firm)
-#target_buildhex = env.Alias("buildhex", target_hex, target_hex)
+target_buildhex = env.Alias("buildhex", target_hex, target_hex)
 
 #
 # Target: Print binary size
@@ -147,6 +147,18 @@ elif upload_protocol == "dfu":
     
     upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
 
+    # Add special DFU header to the binary image
+    env.AddPostAction(
+        join("$BUILD_DIR", "${PROGNAME}.bin"),
+        env.VerboseAction(
+            " ".join([
+                join(platform.get_package_dir("tool-gd32vflash") or "",
+                        "dfu-suffix"),
+                "-v %s" % vid,
+                "-p %s" % pid,
+                "-d 0xffff", "-a", "$TARGET"
+            ]), "Adding dfu suffix to ${PROGNAME}.bin"))
+
     env.Replace(
         UPLOADER = _upload_tool,
         UPLOADERFLAGS = _upload_flags,
@@ -193,4 +205,4 @@ AlwaysBuild(env.Alias("upload", upload_source, upload_actions))
 # Setup default targets
 #
 
-Default([target_buildprog, target_size])
+Default([target_buildprog, target_buildhex, target_size])
