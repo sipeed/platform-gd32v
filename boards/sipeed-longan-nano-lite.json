@@ -1,0 +1,34 @@
+{
+    "build": {
+        "f_cpu": "108000000L",
+        "hwids": [
+            [
+                "0x28e9",
+                "0x0189"
+            ]
+        ],
+        "ldscript": "GD32VF103x8.lds",
+        "mabi": "ilp32",
+        "march": "rv32imac",
+        "mcmodel": "medlow",
+        "mcu": "GD32VF103C8T6",
+        "variant": "sipeed-longan-nano",
+        "board_def": "BOARD_SIPEED_LONGAN_NANO_LITE",
+        "hxtal_value": "8000000"
+    },
+    "debug":{
+        "svd_path": "GD32VF103.svd"
+    },
+    "frameworks": [
+        "gd32vf103-sdk",
+        "arduino"
+    ],
+    "name": "Sipeed Longan Nano Lite",
+    "upload": {
+        "maximum_ram_size": 20480,
+        "maximum_size": 65536,
+        "protocol": "serial"
+    },
+    "url": "https://www.sipeed.com/",
+    "vendor": "Sipeed"
+}
