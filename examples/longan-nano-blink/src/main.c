@@ -53,12 +53,16 @@ void longan_led_init()
 
 void longan_led_on()
 {
-    GPIO_BOP(LED_GPIO_PORT) = LED_PIN;
+    /*
+     * LED is hardwired with 3.3V on the anode, we control the cathode
+     * (negative side) so we need to use reversed logic: bit clear is on.
+     */
+    GPIO_BC(LED_GPIO_PORT) = LED_PIN;
 }
 
 void longan_led_off()
 {
-    GPIO_BC(LED_GPIO_PORT) = LED_PIN;
+    GPIO_BOP(LED_GPIO_PORT) = LED_PIN;
 }
 /*!
     \brief      main function
