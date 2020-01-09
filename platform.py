@@ -54,7 +54,21 @@ class Gd32vPlatform(PlatformBase):
             elif link == "rv-link":
                 debug['tools']['rv-link'] = {
                     "hwids": [["0x28e9", "0x018a"]],
-                    "require_debug_port": True
+                    "require_debug_port": True,
+                    "init_cmds": [
+                        "define pio_reset_halt_target",
+                        "    monitor reset halt",
+                        "end",
+                        "define pio_reset_target",
+                        "    monitor reset",
+                        "end",
+                        "target extended-remote $DEBUG_PORT",
+                        "$INIT_BREAK",
+                        "pio_reset_halt_target",
+                        "$LOAD_CMDS",
+                        "monitor init",
+                        "pio_reset_halt_target"
+                    ]
                 }
             else:
                 openocd_interface = "ftdi/" + link
@@ -80,5 +94,5 @@ class Gd32vPlatform(PlatformBase):
                     }
                 }
 
-        board.manifest['debug'] = debug
+        board.manifest['debug'] =debug
         return board
