@@ -1,13 +1,18 @@
 {
     "build": {
+        "arduino": {
+            "ldscript": "GD32VF103x8.lds"
+        },
         "f_cpu": "108000000L",
+        "gd32vf103-sdk": {
+            "ldscript": "GD32VF103x8.lds"
+        },
         "hwids": [
             [
                 "0x28e9",
                 "0x0189"
             ]
         ],
-        "ldscript": "GD32VF103x8.lds",
         "mabi": "ilp32",
         "march": "rv32imac",
         "mcmodel": "medlow",

@@ -12,8 +12,7 @@ assert FRAMEWORK_DIR and isdir(FRAMEWORK_DIR)
 env.SConscript("_bare.py", exports="env")
 
 env.Append(
-
-    CPPPATH = [
+    CPPPATH=[
         join(FRAMEWORK_DIR, "GD32VF103_standard_peripheral"),
         join(FRAMEWORK_DIR, "GD32VF103_standard_peripheral", "Include"),
         join(FRAMEWORK_DIR, "GD32VF103_usbfs_driver"),
@@ -23,17 +22,17 @@ env.Append(
         join(FRAMEWORK_DIR, "RISCV", "stubs"),
     ],
 
-    LIBS = [
+    LIBS=[
         "c"
     ]
 
 )
 
-
-
-env.Replace(
-    LDSCRIPT_PATH = join(FRAMEWORK_DIR, "RISCV", "env_Eclipse", board.get("build.ldscript")) 
-)
+if not env.BoardConfig().get("build.ldscript", ""):
+    env.Replace(
+        LDSCRIPT_PATH=join(FRAMEWORK_DIR, "RISCV", "env_Eclipse", board.get(
+            "build.gd32vf103-sdk.ldscript"))
+    )
 
 #
 # Target: Build Core Library
@@ -47,7 +46,7 @@ libs = [
 #    env.BuildLibrary(
 #        join("$BUILD_DIR", "usbfs_driver"),
 #        join(FRAMEWORK_DIR, "GD32VF103_usbfs_driver")),
-    
+
     env.BuildLibrary(
         join("$BUILD_DIR", "RISCV"),
         join(FRAMEWORK_DIR, "RISCV")),
@@ -57,7 +56,7 @@ libs = [
 env.Prepend(LIBS=libs)
 
 # if board.get("name") == "GD32VF103V-EVAL":
-    
+
 #     env.Prepend(
 #         CPPPATH = [
 #             join(FRAMEWORK_DIR, "Utilities"),
@@ -72,4 +71,3 @@ env.Prepend(LIBS=libs)
 #     ]
 
 #     env.Prepend(LIBS=libs)
-
