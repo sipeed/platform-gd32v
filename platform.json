@@ -57,6 +57,11 @@
         "toolchain-gd32v": {
             "type": "toolchain",
             "version": "~9.2.0"
+        },
+        "tool-dfuutil": {
+            "type": "uploader",
+            "optional": true,
+            "version": "~1.9.200310"
         }
     }
 
