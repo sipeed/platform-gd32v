@@ -4,8 +4,7 @@
     "version": "1.2.0",
     "keywords": "risc-v, gd32v, sipeed, longan, arduino",
     "description": "The GigaDevice GD32V device is a 32-bit general-purpose microcontroller based on the RISC-V core with an impressive balance of processing power, reduced power consumption and peripheral set.",
-    "url": "https://www.gigadevice.com/products/microcontrollers/gd32/risc-v/",
-    "homepage": "http://platformio.org/platforms/gd32v",
+    "homepage": "https://www.gigadevice.com/products/microcontrollers/gd32/risc-v/",
     "license": "Apache-2.0",
     "engines": {
         "platformio": "<5"
