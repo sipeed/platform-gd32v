@@ -47,30 +47,36 @@
         "framework-gd32vf103-sdk": {
             "optional": true,
             "type": "framework",
+            "owner": "platformio",
             "version": "~1.0.0"
         },
         "framework-arduino-gd32v": {
             "optional":true,
             "type": "framework",
+            "owner": "platformio",
             "version": "~0.1.1"
         },
         "tool-openocd-gd32v": {
             "optional": true,
             "type": "uploader",
+            "owner": "platformio",
             "version": "~0.1.1"
         },
         "tool-gd32vflash": {
             "type": "uploader",
             "optional": true,
+            "owner": "platformio",
             "version": "~0.1.0"
         },
         "toolchain-gd32v": {
             "type": "toolchain",
+            "owner": "platformio",
             "version": "~9.2.0"
         },
         "tool-dfuutil": {
             "type": "uploader",
             "optional": true,
+            "owner": "platformio",
             "version": "~1.9.200310"
         }
     }
