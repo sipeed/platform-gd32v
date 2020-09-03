@@ -15,7 +15,7 @@
     ],
     "license": "Apache-2.0",
     "engines": {
-        "platformio": "<5"
+        "platformio": "^5"
     },
     "repository": {
         "type": "git",
@@ -26,10 +26,6 @@
         "email": "support@sipeed.com",
         "url": "https://www.sipeed.com"
     }],
-    "packageRepositories": [
-        "https://dl.bintray.com/platformio/dl-packages/manifest.json",
-        "http://dl.platformio.org/packages/manifest.json"
-    ],
     "frameworks": {
         "gd32vf103-sdk": {
             "package": "framework-gd32vf103-sdk",
