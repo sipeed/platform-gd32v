@@ -1,4 +1,4 @@
-from platformio.managers.platform import PlatformBase
+from platformio.public import PlatformBase
 
 class Gd32vPlatform(PlatformBase):
 
@@ -10,10 +10,10 @@ class Gd32vPlatform(PlatformBase):
         if variables.get("upload_protocol", default_protocol) == "dfu":
             self.packages["tool-dfuutil"]["optional"] = False
 
-        return PlatformBase.configure_default_packages(self, variables, targets)
-    
+        return super().configure_default_packages(variables, targets)
+
     def get_boards(self, id_=None):
-        result = PlatformBase.get_boards(self, id_)
+        result = super().get_boards(id_)
         if not result:
             return result
         if id_:

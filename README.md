@@ -1,10 +1,10 @@
-# platform-gd32v
-[![Build Status](https://travis-ci.org/sipeed/platform-gd32v.svg?branch=master)](https://travis-ci.org/sipeed/platform-gd32v)
-[![Build status](https://ci.appveyor.com/api/projects/status/x71h1eyhiljmngpo?svg=true)](https://ci.appveyor.com/project/btx000/platform-gd32v)
+# GigaDevice GD32V: development platform for [PlatformIO](https://platformio.org)
+
+[![Build Status](https://github.com/sipeed/platform-gd32v/workflows/Examples/badge.svg)](https://github.com/sipeed/platform-gd32v/actions)
 
 # Usage
 
-1. [Install PlatformIO](http://platformio.org)
+1. [Install PlatformIO](https://platformio.org)
 2. Create PlatformIO project and configure a platform option in [platformio.ini](https://docs.platformio.org/page/projectconf.html) file:
 
 ## Stable version

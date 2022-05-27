@@ -15,7 +15,7 @@
     ],
     "license": "Apache-2.0",
     "engines": {
-        "platformio": "^5"
+        "platformio": "^6"
     },
     "repository": {
         "type": "git",
