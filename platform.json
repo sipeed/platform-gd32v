@@ -1,7 +1,7 @@
 {
     "name": "gd32v",
     "title": "GigaDevice GD32V",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "description": "The GigaDevice GD32V device is a 32-bit general-purpose microcontroller based on the RISC-V core with an impressive balance of processing power, reduced power consumption and peripheral set.",
     "homepage": "https://www.gigadevice.com/products/microcontrollers/gd32/risc-v/",
     "keywords": [
