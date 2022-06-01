@@ -73,7 +73,7 @@
             "type": "uploader",
             "optional": true,
             "owner": "platformio",
-            "version": "~1.9.200310"
+            "version": "~1.11.0"
         }
     }
 
