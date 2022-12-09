@@ -27,4 +27,4 @@ board = ...
 
 # Configuration
 
-Please navigate to [documentation](https://docs.platformio.org/page/platforms/gd32v.html).
+Please navigate to [documentation](https://registry.platformio.org/platforms/sipeed/gd32v).
